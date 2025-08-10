@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CV - Rizky</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <style>
+    body {
+      background-color: #0f172a;
+      font-family: 'Press Start 2P', cursive;
+      color: #fff;
+    }
+    .shadow-neon {
+      box-shadow: 0 0 8px #f0f, 0 0 16px #0ff;
+    }
+    .pixel-border {
+      image-rendering: pixelated;
+      border: 4px solid #0ff;
+    }
+    .card {
+      background: rgba(15, 23, 42, 0.8);
+      border: 2px solid rgba(0, 255, 255, 0.3);
+      border-radius: 8px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .card:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 0 15px #0ff, 0 0 25px #f0f;
+    }
+    .highlight {
+      animation: glow 1.5s infinite alternate;
+    }
+    @keyframes glow {
+      from { text-shadow: 0 0 2px #0ff, 0 0 4px #f0f; }
+      to { text-shadow: 0 0 6px #0ff, 0 0 12px #f0f; }
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body class="p-4">
+  <header class="grid grid-cols-[auto_1fr] gap-4 items-center mb-6">
+    <div class="w-20 h-20 pixel-border bg-gradient-to-br from-pink-500 via-purple-600 to-cyan-400 shadow-neon"><img src="IMG-20250810-WA0009.jpg" alt=""></div>
+    <div>
+      <h1 class="text-2xl text-pink-400 highlight">Rizky</h1>
+      <p class="text-xs text-cyan-300">Frontend Developer | Game Developer</p>
+      <p class="text-[10px] opacity-80">Bogor, Indonesia • rizkyajjah2020@gmail.com</p>
+    </div>
+  </header>
+
+  <main class="grid md:grid-cols-3 gap-4">
+    <div class="space-y-3">
+      <section class="card p-3">
+        <h2 class="text-sm text-pink-300 mb-1">Tentang Saya</h2>
+        <p class="text-[10px] leading-snug">Saya adalah pelajar yang memiliki minat besar pada pengembangan web dan pembuatan game. Senang mempelajari hal baru dan mengasah keterampilan di bidang teknologi, khususnya desain antarmuka dan estetika pixel-art.</p>
+      </section>
+      <section class="card p-3">
+        <h2 class="text-sm text-pink-300 mb-1">Pendidikan</h2>
+        <ul class="text-[10px] space-y-1">
+          <li><strong>2022-2025</strong> — SMK Bina Putra Mandiri</li>
+          <li><strong>2025-sekarang</strong> — Politeknik Negeri Media Kreatif Jakarta</li>
+        </ul>
+      </section>
+    </div>
+
+    <div class="space-y-3">
+      <section class="card p-3">
+        <h2 class="text-sm text-pink-300 mb-1">Pengalaman</h2>
+        <ul class="text-[10px] space-y-1">
+          <li><strong>2024</strong> — PKL di Aretanet</li>
+          <li><strong>2025</strong> — Magang di PT Lifelon Jaya</li>
+        </ul>
+      </section>
+      <section class="card p-3">
+        <h2 class="text-sm text-pink-300 mb-1">Skill & Tools</h2>
+        <div class="grid grid-cols-2 gap-1 text-[10px]">
+          <div>
+            <h3 class="text-cyan-300 mb-1">Bahasa</h3>
+            <ul><li>HTML</li><li>CSS</li><li>PHP</li><li>JavaScript</li><li>C#</li></ul>
+          </div>
+          <div>
+            <h3 class="text-cyan-300 mb-1">Tools</h3>
+            <ul><li>VS Code</li><li>Unity</li></ul>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="space-y-3">
+      <section class="card p-3">
+        <h2 class="text-sm text-pink-300 mb-1">Proyek</h2>
+        <div class="space-y-2 text-[10px]">
+          <div class="p-2 border border-cyan-400/30 shadow-neon rounded hover:bg-cyan-400/10 cursor-pointer">
+            <h3 class="text-cyan-300">Game Endless Pesawat-Soon</h3>
+            <p>Prototype endless shooter dengan mekanik dodge dan upgrade.</p>
+          </div>
+          <div class="p-2 border border-cyan-400/30 shadow-neon rounded hover:bg-cyan-400/10 cursor-pointer">
+            <h3 class="text-cyan-300">Website Sekolah</h3>
+            <p>Sistem manajemen akademik berbasis React.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div class="mt-6 text-center">
+    <button id="downloadBtn" class="px-4 py-2 bg-pink-500 hover:bg-pink-600 rounded shadow-neon text-xs">Download CV (PDF)</button>
+  </div>
+
+  <script>
+    document.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('click', () => {
+        card.classList.toggle('shadow-neon');
+      });
+    });
+
+    document.getElementById('downloadBtn').addEventListener('click', () => {
+      const element = document.body;
+      const opt = {
+        margin: 0.2,
+        filename: 'CV_Rizky.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true },
+        jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+      };
+      html2pdf().set(opt).from(element).save();
+    });
+  </script>
+</body>
+</html>
